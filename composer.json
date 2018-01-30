@@ -1,0 +1,14 @@
+{
+    "name": "nerd/spebok",
+    "description": "this is tool to convert books to sound using text to speach api",
+    "authors": [
+        {
+            "name": "aa-ahmed-aa",
+            "email": "ahmedkhaled36@hotmail.com"
+        }
+    ],
+    "require": {
+        "duncan3dc/speaker": "^1.0",
+        "smalot/pdfparser": "*"
+    }
+}
