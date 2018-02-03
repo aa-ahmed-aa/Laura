@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+<textarea rows="20" cols="50" id="arabic_input">
+احمد خالد محمد محمد محمد محمد    
+</textarea>
+<button onclick="speek();" >Speek</button>
+
+    <script>
+        function speek()
+        {
+            var text = $('#arabic_input').val();
+            
+            responsiveVoice.speak(text, "Arabic Male");
+        }
+        
+    </script>
+</body>
+</html>
