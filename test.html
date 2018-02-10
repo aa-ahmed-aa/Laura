@@ -3,35 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
-    <script
-  src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="index.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="dropzone.css" type="text/css" rel="stylesheet" />
+    <script src="dropzone.js"></script>
     <title>Document</title>
 </head>
 <body>
-    
-<textarea rows="20" cols="50" id="arabic_input">
+    <div style="">       
+        <div method="post" id="my-awesome-dropzone" action="vvupload.php" class="dropzone"></div>
+        <input type="hidden" id="_2nd_file" name="data[StudyResource][file]">
 
-</textarea>
-<button onclick="speek();" >Speek</button>
-
-    <script>
-        function speek()
-        {
-            var text = $('#arabic_input').val();
-            
-            responsiveVoice.speak(text, "Arabic Female");
-        }
-
-        new PdfReader().parseFileItems("arabic.pdf", function(err, item){
-          if (err)
-            callback(err);
-          else if (!item)
-            callback();
-          else if (item.text)
-            console.log(item.text);
-        });
-
-    </script>
+        <textarea rows="20" cols="20" id="arabic_input"></textarea>
+        <br>
+        <button onclick="speek();" >Speek</button>
+    </div>
 </body>
+
+<script>
+    function speek()
+    {
+        var text = $('#arabic_input').val();
+        
+        responsiveVoice.speak(text, "Arabic Female");
+    }
+
+    Dropzone.options.myAwesomeDropzone = {
+      /*renameFilename: function (filename) 
+        {                
+            fileN = new Date().getTime() + '_' + filename
+            document.getElementById("_2nd_file").value =fileN;
+        },*/
+      acceptedFiles: ".pdf",
+      init: function() {
+        this.on("success", 
+            function(file, paramName) 
+            { 
+                var url = "http://localhost:8080/spebok/read_pdf.php?file_name="+paramName;
+                $.ajax({
+                    url:url,  
+                    success:function(data) {
+                      $('#arabic_input').val(data);
+                    }
+                });
+            }
+        );
+      }
+     
+    };
+</script>
+
 </html>
