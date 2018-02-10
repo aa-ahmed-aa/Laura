@@ -7,24 +7,59 @@
     <link href="dropzone.css" type="text/css" rel="stylesheet" />
     <script src="dropzone.js"></script>
     <title>Document</title>
+    <style type="text/css">
+        #arabic_input
+        {
+            width: 99%;
+            height: 50%;
+        }
+
+        #content{
+            width: 655px;
+            margin: auto;
+        }
+
+        #speack_button{
+            margin-left: 40%;
+            width: 150px;
+            height: 50px;
+            font-size: 28px;
+            border-radius: 12px;
+            background-color: #0c4effc2;
+            color: #fff;
+        }
+        #lang{
+            display:inline-block;
+        }
+        
+    </style>
 </head>
 <body>
-    <div style="">       
+    <div id="content">
+        <select id="lang">
+            <option value="Arabic">Arabic</option>
+            <option value="English">English</option>
+        </select>
+        <br><br>
         <div method="post" id="my-awesome-dropzone" action="vvupload.php" class="dropzone"></div>
-        <input type="hidden" id="_2nd_file" name="data[StudyResource][file]">
-
-        <textarea rows="20" cols="20" id="arabic_input"></textarea>
         <br>
-        <button onclick="speek();" >Speek</button>
+        <textarea rows="20" id="arabic_input"></textarea>
+        <br>
+        <button id="speack_button" onclick="speek($('#lang'));" >Speek</button>
     </div>
 </body>
 
 <script>
-    function speek()
+    function speek(lang)
     {
+        if( lang.val() == 'Arabic')
+            var language= "Arabic Female";
+        else if( lang.val() == 'English')
+            var language= "UK English Female";
+
         var text = $('#arabic_input').val();
         
-        responsiveVoice.speak(text, "Arabic Female");
+        responsiveVoice.speak(text, language);
     }
 
     Dropzone.options.myAwesomeDropzone = {
