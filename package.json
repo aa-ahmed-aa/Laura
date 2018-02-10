@@ -1,0 +1,19 @@
+{
+  "name": "synde",
+  "version": "1.0.0",
+  "description": "this is mix of two apis(Text-to-speech &amp; PDF_Parser)to convert books to",
+  "main": "read_pdf_using_pdffparser_javascript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aa-ahmed-aa/spebok.git"
+  },
+  "author": "aa-ahmed-aa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aa-ahmed-aa/spebok/issues"
+  },
+  "homepage": "https://github.com/aa-ahmed-aa/spebok#readme"
+}

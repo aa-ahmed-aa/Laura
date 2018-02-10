@@ -5,12 +5,13 @@
     <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="index.js"></script>
     <title>Document</title>
 </head>
 <body>
     
 <textarea rows="20" cols="50" id="arabic_input">
-احمد خالد محمد محمد محمد محمد    
+
 </textarea>
 <button onclick="speek();" >Speek</button>
 
@@ -19,9 +20,18 @@
         {
             var text = $('#arabic_input').val();
             
-            responsiveVoice.speak(text, "Arabic Male");
+            responsiveVoice.speak(text, "Arabic Female");
         }
-        
+
+        new PdfReader().parseFileItems("arabic.pdf", function(err, item){
+          if (err)
+            callback(err);
+          else if (!item)
+            callback();
+          else if (item.text)
+            console.log(item.text);
+        });
+
     </script>
 </body>
 </html>
