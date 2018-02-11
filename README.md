@@ -1,5 +1,4 @@
 # spebok
-<<<<<<< HEAD
 spebok is a text to spech and pdf to speech it has a support for arabic and english content it can be used for reading your books or 
 
 ## installation
