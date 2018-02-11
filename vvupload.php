@@ -1,5 +1,5 @@
 <?php
-die('Hi');
+
 $ds = DIRECTORY_SEPARATOR;  //1
  
  //die(var_dump($_FILES));
