@@ -4,7 +4,7 @@ $ds = DIRECTORY_SEPARATOR;  //1
  
  //die(var_dump($_FILES));
 
-$storeFolder = '/pdfs';   //2
+$storeFolder = 'pdfs';   //2
  
 if (!empty($_FILES)) {
      
