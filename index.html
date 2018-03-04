@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Laura</title>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style type="text/css">
 	body{
@@ -50,5 +51,16 @@
 		Githup: (aa-ahmed-aa)
 	</footer>
 </body>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+			var url = "http://159.203.66.57:8000/counter.php";
+	        $.ajax({
+	            url:url,  
+	            success:function(data) {
+	              console.log(data);
+	            }
+	        });
+	});
+	
+</script>
 </html>
