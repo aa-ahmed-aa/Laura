@@ -39,30 +39,33 @@
 </head>
 <body>
     <div id="content">
-        <select id="lang">
-            <option value="Arabic">Arabic</option>
-            <option value="English">English</option>
-        </select>
-        <br><br>
         <div method="post" id="my-awesome-dropzone" action="vvupload.php" class="dropzone"></div>
         <br>
         <textarea rows="20" id="arabic_input"></textarea>
         <br>
-        <button id="speack_button" onclick="speek($('#lang'));" >Speek</button>
+        <button id="speack_button" onclick="speek();" >Speek</button>
     </div>
 </body>
 
 <script>
-    function speek(lang)
+    function detectLanguage(text)
     {
-        if( lang.val() == 'Arabic')
-            var language= "Arabic Female";
-        else if( lang.val() == 'English')
-            var language= "UK English Female";
+        var text = /[A-Za-z0-9]+/.test(text);
+        var lang = ( text ? 'English' : 'Arabic' );
+        return lang;
+    }
 
-        var text = $('#arabic_input').val();
-        
-        responsiveVoice.speak(text, language);
+    function speek()
+    {
+        var content = $('#arabic_input').val();
+        if( !content )
+        {
+             alert("Please enter text in the input or choose a valid pdf/file");
+             return false;
+        }
+        lang = detectLanguage(content);
+        var language = ( lang == 'Arabic' ? "Arabic Female" : "UK English Female" ) ;
+        responsiveVoice.speak(content, language);
     }
 
     Dropzone.options.myAwesomeDropzone = {
