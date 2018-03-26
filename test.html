@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link href="dropzone.css" type="text/css" rel="stylesheet" />
     <script src="dropzone.js"></script>
     <title>Document</title>
     <style type="text/css">
         body{
             background-color: #000000;
+                margin-top: 5%;
         }
         #arabic_input
         {
             width: 99%;
             height: 50%;
+            background-color: #480849;
+            color:#fff;
+            font-family: 'Poiret One', cursive;
+            font-weight: bold;
+            border-color: #fff;
+            border-radius: #fff;
         }
 
         #content{
@@ -29,20 +37,61 @@
             font-size: 28px;
             border-radius: 12px;
             background-color: #0c4effc2;
+            border-color: #fff;
             color: #fff;
+            font-family: 'Poiret One', cursive;
+            font-weight: bold;
+
         }
         #lang{
             display:inline-block;
         }
+
+        #url{
+            width: 84%;
+            border-radius: 6px;
+            margin-bottom: 17px;
+            height: 30px;
+            background-color: #f7cb47;
+            font-weight: bold;
+            color: #000;
+            border-color: #fff;
+            border-radius: #fff;
+        }
         
+        #extractButton{
+            margin-left: 10px;
+            padding: 10px;
+            width: 84px;
+            border-radius: 6px;
+            font-family: 'Poiret One', cursive;
+            font-weight: bold;
+            background-color: #ce0e31;
+            font-size:15px;
+            color: #fff;
+            border-color: #fff;
+            border-radius: #fff;
+        }
+
+        #my-awesome-dropzone{
+            background-color: #00145f;
+            color: #fff;
+            font-family: 'Poiret One', cursive;
+            font-size: 30px;
+            color: #fff;
+            border-color: #fff;
+            border-radius: #fff;
+        }
     </style>
 </head>
 <body>
     <div id="content">
+        <input type="text" id="url" placeholder="Enter your blog URL"> <button onclick="extracFromMedium();" id="extractButton">Extract</button>
+        <br>
         <div method="post" id="my-awesome-dropzone" action="vvupload.php" class="dropzone"></div>
         <br>
         <textarea rows="20" id="arabic_input"></textarea>
-        <br>
+        <br><br>
         <button id="speack_button" onclick="speek();" >Speek</button>
     </div>
 </body>
@@ -50,8 +99,11 @@
 <script>
     function detectLanguage(text)
     {
+        text = text.slice(0,5);
+
         var text = /[A-Za-z0-9]+/.test(text);
         var lang = ( text ? 'English' : 'Arabic' );
+        console.log(lang);
         return lang;
     }
 
@@ -68,12 +120,25 @@
         responsiveVoice.speak(content, language);
     }
 
+    function extracFromMedium()
+    {
+      var url = $('#url').val();
+      $.ajax({
+            url: 'getContent.php',
+            data:  {'url': url},
+            type: 'POST',
+            success: function(response){
+              content = $(response).contents().find('.section-content');
+              content = $(content).text();
+              $('#arabic_input').val(content);
+            },
+            error: function(e){
+               alert('Invalid URL or Some Error occured!');
+            }
+        });
+    }
+
     Dropzone.options.myAwesomeDropzone = {
-      /*renameFilename: function (filename) 
-        {                
-            fileN = new Date().getTime() + '_' + filename
-            document.getElementById("_2nd_file").value =fileN;
-        },*/
       acceptedFiles: ".pdf",
       init: function() {
         this.on("success", 
@@ -89,6 +154,8 @@
             }
         );
       }
+
+   
      
     };
 </script>
